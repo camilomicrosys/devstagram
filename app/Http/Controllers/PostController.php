@@ -14,11 +14,15 @@ class PostController extends Controller
     public function index(User $user){
       //como la varibale user que viene de la ruta user:username   ya tiene los datos del usaurio sacamos el id del user que viene porurl
       //y luego sacamos la relacion de user con post
-      //sacamos los post de este user id que viene por la url que visiatamos
-     $posts=Post::where('user_id',$user->id);
-     dd($posts);
-     exit(); 
-      $data=['user'=>$user];
+      //sacamos los post de este user id que viene por la url que visiatamos se usa el get para que traiga los resultados
+      //como estan relacionadas con eloquent se pasa asi los post del user_id
+     $posts=Post::where('user_id',$user->id)->get();
+    //mandamos a la vista el usuario que viene por la url y sus post
+      $data=[
+        'user'=>$user,
+        'posts'=>$posts
+    
+    ];
 
         
         return view('dashboard',$data);
