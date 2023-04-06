@@ -12,7 +12,14 @@ class PostController extends Controller
         }
          //esto para obtener el usaurio por la url ya que consulta el modelo user y no hay nececidad de ir a bscarlos por id sino que ya llega
     public function index(User $user){
-        $data=['user'=>$user];
+      //como la varibale user que viene de la ruta user:username   ya tiene los datos del usaurio sacamos el id del user que viene porurl
+      //y luego sacamos la relacion de user con post
+      //sacamos los post de este user id que viene por la url que visiatamos
+     $posts=Post::where('user_id',$user->id);
+     dd($posts);
+     exit(); 
+      $data=['user'=>$user];
+
         
         return view('dashboard',$data);
 }
