@@ -15,8 +15,10 @@ class PostController extends Controller
       //como la varibale user que viene de la ruta user:username   ya tiene los datos del usaurio sacamos el id del user que viene porurl
       //y luego sacamos la relacion de user con post
       //sacamos los post de este user id que viene por la url que visiatamos se usa el get para que traiga los resultados
-      //como estan relacionadas con eloquent se pasa asi los post del user_id
-     $posts=Post::where('user_id',$user->id)->get();
+      //como estan relacionadas con eloquent se pasa asi los post del user_id como lo vamos a paginar mejor le ponemos paginate
+     //$posts=Post::where('user_id',$user->id)->get();
+     //lo paginamos y en la vista ponemos el paginados que es {{$posts->links}}
+     $posts=Post::where('user_id',$user->id)->paginate(2);
     //mandamos a la vista el usuario que viene por la url y sus post
       $data=[
         'user'=>$user,
@@ -53,6 +55,17 @@ public function crearPost(){
     );
   
     return redirect()->route('inicioapp',auth()->user()->username);
+  }
+
+  //este para mostrar un solo post l info al clikear la imagen de post como la ruta es {user:username}/post/{post} esta accediendo al modelo pos lo accedemos y ya tenemos los datos de relacion
+  //y tambien ponemos el de user para tener accedo a ambos modelos importante colocar estos dos en el mismo orden de la url {user:username}/post/{post} primero user luego post
+  public function mostrarpost(User $user,Post $post){
+ $data=[
+  'post'=>$post,
+  'user'=>$user
+];
+  return view('posts.mostrarunpost',$data);
+
   }
 
 }

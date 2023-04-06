@@ -32,6 +32,8 @@ Route::post('/cerrar-sesion',[LoginController::class,'cerrarSesion'])->name('cer
 //muro//inicio despues de loguear
 Route::get('/{user:username}',[PostController::class,'index'])->name('inicioapp');
 Route::get('/post/crear',[PostController::class,'crearPost'])->name('crearPost');
+//este es para mostrar la informacion de un solo post cuando se clikee la imagen
+Route::get('/{user:username}/post/{post}',[PostController::class,'mostrarpost'])->name('mostrarpost');
 
 
 //proceso de imagenes de dropzon
