@@ -68,4 +68,22 @@ public function crearPost(){
 
   }
 
+
+  //eliminar post este viene por url con el modelo post/posteliminar/{post}
+  public function eliminarpost(Post $post){
+    //borramos la imagen fisica del servidor
+    $imagen_a_borrar=$post->imagen;
+    $ruta_imagen = public_path('uploads/' . $imagen_a_borrar);
+
+    if (file_exists($ruta_imagen)) {
+        unlink($ruta_imagen);
+    }
+   //borramos el post
+   $post->delete();
+   
+   return redirect()->route('inicioapp',auth()->user()->username)->with('mensaje', 'Post eliminado correctamente.');
+  }
+
+  
+
 }

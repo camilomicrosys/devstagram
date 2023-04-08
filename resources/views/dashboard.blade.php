@@ -20,9 +20,19 @@ Perfil  {{ $user->username}}
     <div>
     usuario visitado :{{$user->username}}
     <p>seguidors: 1</p>
-    <p>post: 2</p>
+    <!-- unicamente tengo user que es el modelo que viene por url pero como user modelo tienen relacion con post modelo saco aca la cantidad con eloquent rebacano-->
+    <p>post: {{$user->posts->count()}}</p>
     </div>
   </div>
+
+  <!-- Para mostrar el exitoso se elimine un post redirecciona de nuevo aca -->
+  @if (session('mensaje'))
+  <div class="alert alert-primary" role="alert">
+   
+          {{session('mensaje')}}
+    
+  </div>
+@endif
 <!-- para mostrar publicaciones -->
  <section>
   <!-- validamos si no hay publicaciones le decimos que aun no hay publicaciones -->
@@ -34,7 +44,7 @@ Perfil  {{ $user->username}}
       @foreach ($posts as $post)
       <div>
         <!-- colocamos el href para que se vaya a consultar la info de la imagen clikeada pasamos ruta y post y ya sabe a que post esatmos clikeando
-        el $user es el que viene desde postcontroller index, con el $user de relacion eloquent
+        el $user es el que viene desde postcontroller index, con el $user de relacion eloquent y el post es el de la vuelta de este foreach ahi se almacenan todos los atributos en x vuelta
         -->
         <a href="{{route('mostrarpost',['user'=>$user,'post'=>$post])}}">
         <img height="100px;" src="{{asset('uploads').'/'.$post->imagen}}" alt="Imagen del post {{$post->titulo}}">
@@ -50,6 +60,7 @@ Perfil  {{ $user->username}}
   @else
    <h6>No hay publicaciones para mostrar...</h6>
   @endif
+  
 
  </section>
 @endsection

@@ -16,7 +16,7 @@
     <!--propia de blade para validar si esta autentcado o no  y al guest para no autenticados-->
    @auth
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">Devstagram</a> 
+          <a class="navbar-brand" href="{{route('inicioapp',auth()->user()->username)}}">Devstagram</a> 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -45,7 +45,7 @@
    <!--Si no esta autenticado le mostramos el nav  solo con login y crear -->
    @guest
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Devstagram</a> 
+    <a  class="navbar-brand" href="#">Devstagram</a> 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
