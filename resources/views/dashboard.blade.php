@@ -16,7 +16,12 @@ Perfil  {{ $user->username}}
 <div class="container">
     <div class="row">
       <div class="col-6">
+        <!-- Validamos si el suario que va por la url al iniciar la app es el objeto de relacion de eloquent puede ser el logueado o el que visitamos si tiene imagen la mostramos sino mostramos el cosito de login el iconito-->
+        @if($user->imagen !=""&& $user->imagen !=null):
+       <img style="height:100px;" src="{{ asset('perfiles/' . $user->imagen) }}" alt="imagen usuario">
+        @else
         <img style="height:100px;" src="{{asset('img/users.png')}}" alt="imagen usuario">
+        @endif
       </div>
       <div class="col-6">
         {{ auth()->user()->username}}

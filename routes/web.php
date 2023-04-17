@@ -68,7 +68,7 @@ Route::post('/{post}/likes',[LikeController::class,'darMegusta'])->name('darMegu
 //mostrar formulario para editar perfil al darle click en editar viala el nombre del usaurio para eso la url con el username
 Route::get('/{user:username}/gestionPerfil',[PerfilController::class,'index'])->name('gestionarPerfil');
 //actualizar el perfil
-Route::post('/{user:username}/actualziarPerfil',[PerfilController::class,'actualizarPerfil'])->name('actualizarPerfil');
+Route::post('/actualizarPerfil',[PerfilController::class,'actualizarPerfil'])->name('actualizarPerfil');
 
 
 

@@ -10,7 +10,7 @@
   <!--esto para dropson -->
   <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-    <title>Laravel 9 @yield('titulos')</title>
+    <title>Laravel 9  @yield('titulos')</title>
   </head>
   <body>
     <!--propia de blade para validar si esta autentcado o no  y al guest para no autenticados-->
