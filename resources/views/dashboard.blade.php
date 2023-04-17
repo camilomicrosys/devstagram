@@ -4,6 +4,12 @@ Tu cuenta
 @endsection
 @section('titulopag')
 Perfil  {{ $user->username}}
+<!--validamos si el id de este perfil que se visita es el mismo del id autenticado para habilitarle el boton de editar -->
+@if($user->id==auth()->user()->id):
+ <a href="{{route('gestionarPerfil',['user'=>$user])}}">editarPerfil</a>
+@else:
+<!-- no mostramos nelace de edicion de usuario -->
+@endif
 @endsection
 
 @section('contenido')

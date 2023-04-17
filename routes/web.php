@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PerfilController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,13 @@ Route::post('/crear/insertarImagenDb',[PostController::class,'insertarImagenDb']
 //Likes
 //dar like a una foto  y quitar like
 Route::post('/{post}/likes',[LikeController::class,'darMegusta'])->name('darMegusta');
+
+
+//gestionar la edicion del perfil del usuario autenticado
+//mostrar formulario para editar perfil al darle click en editar viala el nombre del usaurio para eso la url con el username
+Route::get('/{user:username}/gestionPerfil',[PerfilController::class,'index'])->name('gestionarPerfil');
+//actualizar el perfil
+Route::post('/{user:username}/actualziarPerfil',[PerfilController::class,'actualizarPerfil'])->name('actualizarPerfil');
 
 
 
