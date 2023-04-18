@@ -53,5 +53,29 @@ class User extends Authenticatable
         return  $this->hasMany(Post::class);
     }
    
+    //relacion con seguidores para almacenar los que seguimos y los seguidores, como en seguidores ambos son id_user toca salir
+    //de lo normal de eloquent y crear la de seguidores de diferente manera
+
+    //alamcena seguidores de un usuario
+    //un usuario puede tener muchos seguidores se tira contara usuarios por que cuando creamos la migracion
+    //pusimos el constarined users  en esto toco salir de la convesnion de laravel 
+    //LE DECIMOS QUE LA RELACION USER coja la tabla followerd , donde User:userid este foraneo relacionado con folowrer_id
+    public function followers(){
+        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
+    }
+
+    //metodo para comprobar si un usuario ya sigue a otro
+    public function siguiendo(User $user){
+        //esto accede al metodo de arribita y valida automaticamente si este usuario que esta entrando ya sigue a este osea si ya ha registo, 
+        //devuelve true o false y ya en dashboard pasamos el user autenticado por parametro a esta funcion
+        return $this->followers->contains($user->id);
+
+    }
+
+
+    //almacena los que seguimos es la misma de los seguidores solo que a la inversa follower primero y luego user id
+    public function followings(){
+        return $this->belongsToMany(User::class,'followers','follower_id','user_id');
+    }
   
 }

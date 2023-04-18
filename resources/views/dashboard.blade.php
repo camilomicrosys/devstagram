@@ -30,9 +30,35 @@ Perfil  {{ $user->username}}
     <!--Imprimimos el usaurio que se esta vistando que viene de la ruta  /{user:username}-->
     <div>
     usuario visitado :{{$user->username}}
-    <p>seguidors: 1</p>
+    <!--Esta es la relacion eloquent user y en user esta followers-->
+    <p>seguidors: {{$user->followers->count()}}</p>
+    <br>
+    <!--Esta es la relacion eloquent user y en user esta follwing que es la misma anterior solo que los id se hacen al contrario-->
+    <p>Siguiendo: {{$user->followings->count()}}</p>
     <!-- unicamente tengo user que es el modelo que viene por url pero como user modelo tienen relacion con post modelo saco aca la cantidad con eloquent rebacano-->
     <p>post: {{$user->posts->count()}}</p>
+   
+    <!--Como en este dashboar entran los autenticados al loguearse o si visitamos algun usuario validamos que el autenticado sea defierente al user que entra por url, para no mostrar el boton de seguir-->
+   @if ($user->id != auth()->user()->id):
+     <!--En el modelo de users creamos la validacion para ver si est ya lo sigue y usamos la funcion creada en ese modelo -->
+          <!--Le digo sino lo esta siguiendo muestra boton seguir si ya lo sigue muestre dejar de seguir -->
+          @if(!$user->siguiendo(auth()->user()))
+
+          <form action="{{route('seguir',['user'=>$user])}}" method="post">
+              @csrf
+              <button class="btn btn-info">Seguir</button>
+
+            </form>
+          @else
+                <!--Este user es el que siempre emos manejado de la relacion con eloquentel que viaja por la url cuando nos logueamos o cuando visitamos un usuario-->
+                <form  action="{{route('dejarDeSeguir',['user'=>$user])}}" method="post">
+                  @method('DELETE')
+                  @csrf
+                  <button class="btn btn-danger">Dejar de Seguir</button>
+
+                </form>
+          @endif
+   @endif  
     </div>
   </div>
 

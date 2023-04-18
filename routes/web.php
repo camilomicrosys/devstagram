@@ -5,7 +5,7 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PerfilController;
-
+use App\Http\Controllers\FollowerController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegisterController;
@@ -69,6 +69,14 @@ Route::post('/{post}/likes',[LikeController::class,'darMegusta'])->name('darMegu
 Route::get('/{user:username}/gestionPerfil',[PerfilController::class,'index'])->name('gestionarPerfil');
 //actualizar el perfil
 Route::post('/actualizarPerfil',[PerfilController::class,'actualizarPerfil'])->name('actualizarPerfil');
+
+
+//proceso de seguidores
+//siguiendo usuario
+
+Route::post('/{user:username}/seguir',[FollowerController::class,'index'])->name('seguir');
+//dejar de seguir
+Route::delete('/{user:username}/dejarDeseguir',[FollowerController::class,'dejarDeSeguir'])->name('dejarDeSeguir');
 
 
 
