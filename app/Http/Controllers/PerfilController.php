@@ -35,13 +35,12 @@ class PerfilController extends Controller
     $request->request->add(['username'=>Str::slug($request->username)]);
    /*  
    esta linea 'unique:users,username,'.auth()->user()->id es la que permite actualizar el mismo username si es del usuario autenticado se pasa id autenticado ya laravel por debajo lo asimila
+   esto permite que actualice user y email si es del usuario original logueado para evitar duplicados con el unique
    */
-    $this->validate($request, [
-        'username' => [
-            'required','unique:users,username,'.auth()->user()->id,'min:3'
-        ]
-    ]);
-    
+  $this->validate($request, [
+    'username' => 'required|min:3|unique:users,username,' . auth()->user()->id,
+    'email' => 'required|min:3|unique:users,email,' . auth()->user()->id,
+]);
     //validamos si viene imagen actualizamos imagen si no nada
     if($request->imageperfil){
          //eliminamos la imagen que tenga actual si es diferente de null o vacio ya que si es null o vacio pues no tiene es primer vez
@@ -67,6 +66,7 @@ class PerfilController extends Controller
     //guardar cambios
 
     $usuario->username= $request->username;
+    $usuario->email=$request->email;
     //si existe nombre de la imagen ponemos el nombre sino ponemos el del user auth si ese no tienen entonces dejamos null
     $usuario->imagen=$nombre_imagen?? auth()->user()->imagen??null;
     //actualizamos y redireccionamos al muro

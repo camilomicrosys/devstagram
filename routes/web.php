@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegisterController;
@@ -22,12 +23,16 @@ use App\Http\Controllers\RegisterController;
 */
 
 
+//home inicio de la app
+//si entro al controlador esta tiene un solo metodo y con el __invoke lo inicializa solo se usa cuando una clase tendra solo 1 metodo
+Route::get('/',HomeController::class)->name('home');
+
 //autenticacion registro y login
 Route::get('/crear-cuenta',[RegisterController::class,'index'])->name('crearCuentaformulario');
 Route::post('/registrar-cuenta',[RegisterController::class,'store'])->name('registararCuenta');
 
 //login
-Route::get('/',[LoginController::class,'index'])->name('login');
+Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/procesar-login',[LoginController::class,'procesarLogin'])->name('procesarLogin');
 //se pone en post y se envia con formulario para hacerlo seguro con @csrf
 Route::post('/cerrar-sesion',[LoginController::class,'cerrarSesion'])->name('cerrarsesion');

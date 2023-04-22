@@ -15,7 +15,7 @@ Post: {{$post->titulo}}
             <h6>{{$post->titulo}}</h6>
             <img height="100px;" src="{{asset('uploads').'/'.$post->imagen}}" alt="">
             <div>
-                <p>8 Likes</p>
+                
             </div>
             <div>
                  <!-- Aca aplicamos la relacion de eloquent de post contra user -->

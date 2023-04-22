@@ -14,6 +14,13 @@ Edicion de perfil
         <label for="exampleInputPassword1">Username</label>
         <input type="text" class="form-control" id="username" name="username"  value="{{auth()->user()->username}}">
       </div>
+      <div class="form-group">
+        @error('email')
+        {{$message}}
+        @enderror
+        <label for="exampleInputPassword1">Email</label>
+        <input type="text" class="form-control" id="email" name="email"  value="{{auth()->user()->email}}">
+      </div>
     
       <div class="form-group">
         <label for="exampleInputPassword1">Imagen perfil</label>
