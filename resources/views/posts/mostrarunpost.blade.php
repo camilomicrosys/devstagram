@@ -62,7 +62,7 @@ Post: {{$post->titulo}}
             </div>
       </div>
       <div class="col-2">
-        <!--Espacio en blanco -->
+        <!--Espacio en blanco  i-->
       </div>
       <div class="col-6">
          <div>
